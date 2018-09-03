@@ -1,0 +1,97 @@
+# Enables Rails cops.
+Rails:
+  Enabled: true
+
+# Enforces consistent use of action filter methods.
+Rails/ActionFilter:
+  Enabled: true
+  EnforcedStyle: action
+
+# Check that models subclass ApplicationRecord.
+Rails/ApplicationRecord:
+  Enabled: false
+
+# Enforce using `blank?` and `present?`.
+Rails/Blank:
+  Enabled: false
+
+# Checks the correct usage of date aware methods, such as `Date.today`,
+# `Date.current`, etc.
+Rails/Date:
+  Enabled: false
+
+# Prefer delegate method for delegations.
+# Disabled per https://gitlab.com/gitlab-org/gitlab-ce/issues/35869
+Rails/Delegate:
+  Enabled: false
+
+# This cop checks dynamic `find_by_*` methods.
+Rails/DynamicFindBy:
+  Enabled: false
+
+# This cop enforces that 'exit' calls are not used within a rails app.
+Rails/Exit:
+  Enabled: true
+  Exclude:
+    - lib/gitlab/upgrader.rb
+    - 'lib/backup/**/*'
+
+# Prefer `find_by` over `where.first`.
+Rails/FindBy:
+  Enabled: true
+
+# Prefer `all.find_each` over `all.find`.
+Rails/FindEach:
+  Enabled: true
+
+# Prefer has_many :through to has_and_belongs_to_many.
+Rails/HasAndBelongsToMany:
+  Enabled: true
+
+# This cop is used to identify usages of http methods like `get`, `post`,
+# `put`, `patch` without the usage of keyword arguments in your tests and
+# change them to use keyword args.
+Rails/HttpPositionalArguments:
+  Enabled: false
+
+# Checks for calls to puts, print, etc.
+Rails/Output:
+  Enabled: true
+  Exclude:
+    - lib/gitlab/seeder.rb
+    - lib/gitlab/upgrader.rb
+    - 'lib/backup/**/*'
+    - 'lib/tasks/**/*'
+
+# This cop checks for the use of output safety calls like html_safe and
+# raw.
+Rails/OutputSafety:
+  Enabled: false
+
+# Checks for incorrect grammar when using methods like `3.day.ago`.
+Rails/PluralizationGrammar:
+  Enabled: true
+
+# Enforce using `blank?` and `present?`.
+Rails/Present:
+  Enabled: false
+
+# Checks for `read_attribute(:attr)` and `write_attribute(:attr, val)`.
+Rails/ReadWriteAttribute:
+  Enabled: false
+
+# Do not assign relative date to constants.
+Rails/RelativeDateConstant:
+  Enabled: false
+
+# Checks the arguments of ActiveRecord scopes.
+Rails/ScopeArgs:
+  Enabled: true
+
+# This cop checks for the use of Time methods without zone.
+Rails/TimeZone:
+  Enabled: false
+
+# This cop checks for the use of old-style attribute validation macros.
+Rails/Validation:
+  Enabled: true

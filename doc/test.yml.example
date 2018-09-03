@@ -1,0 +1,24 @@
+settings:
+  baseurl: "https://been4.dev.eman.cz/api"
+tests:
+  - name: "Test scenario 1"
+    steps:
+    - step: 1
+      name: "Get partner opportunity detail"
+      desc: "Longer description"
+      url: "partners/ABC987654321/opportunities/1"
+      method: GET
+      input:
+        header:
+          AccountCirleId: "71"
+          Token: "81c4a38efe8b0b7644f418ae6aa0276d"
+          VersionCode: "9999"
+          From: "539653486007533"
+        body: nil
+      output:
+        header:
+          server: "nginx"
+        status: 200
+        body:
+          partner: "Jan Novak"
+          partnerNumber: "123456789"

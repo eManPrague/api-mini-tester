@@ -1,0 +1,42 @@
+image: registry.eman.cz/docker/ruby/2.4.0:1.0
+
+stages:
+  - review
+  - test
+  - publish
+
+rubocop:
+  stage: review
+  script:
+    - bundle install
+    - bundle exec rubocop
+  only:
+    - branches
+  tags:
+    - docker
+  allow_failure: true
+
+test:
+  stage: test
+  script:
+    - bundle install
+    - rake install:local
+    - TESTOPTS="--verbose" TEST=test/*_test.rb rake test
+  only:
+    - branches
+  tags:
+    - docker
+  artifacts:
+    reports:
+      junit: test/reports/TEST-minitest.xml
+
+publish:
+  stage: publish
+  script:
+    - ./publish.sh
+    - ./release.sh
+  only:
+    - tags
+  tags:
+    - docker
+

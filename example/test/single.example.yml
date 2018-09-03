@@ -1,0 +1,26 @@
+name: "GET example"
+desc: "Test suite GET example"
+settings:
+  baseurl: "https://api.example.com"
+data:
+  from:
+    "me@you.it"
+tests:
+  - name: "Test scenario 1"
+    steps:
+    - step: 0
+      name: "GET some list"
+      desc: "Longer description"
+      uri: "items"
+      method: GET
+      input:
+        header:
+          From: "{{ data['from'] }}"
+        body: nil
+      output:
+        header:
+          server: "nginx"
+        status: 200
+        body:
+          id: 1
+          name: "Item 1"

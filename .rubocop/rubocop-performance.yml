@@ -1,0 +1,55 @@
+# Use `caller(n..n)` instead of `caller`.
+Performance/Caller:
+  Enabled: false
+
+# Use `casecmp` rather than `downcase ==`.
+Performance/Casecmp:
+  Enabled: true
+
+# Use `str.{start,end}_with?(x, ..., y, ...)` instead of
+# `str.{start,end}_with?(x, ...) || str.{start,end}_with?(y, ...)`.
+Performance/DoubleStartEndWith:
+  Enabled: true
+
+# Use `strip` instead of `lstrip.rstrip`.
+Performance/LstripRstrip:
+  Enabled: true
+
+# Use `Range#cover?` instead of `Range#include?`.
+Performance/RangeInclude:
+  Enabled: true
+
+# This cop identifies the use of a `&block` parameter and `block.call`
+# where `yield` would do just as well.
+Performance/RedundantBlockCall:
+  Enabled: true
+
+# This cop identifies use of `Regexp#match` or `String#match in a context
+# where the integral return value of `=~` would do just as well.
+Performance/RedundantMatch:
+  Enabled: true
+
+# This cop identifies places where `Hash#merge!` can be replaced by
+# `Hash#[]=`.
+Performance/RedundantMerge:
+  Enabled: true
+  MaxKeyValuePairs: 1
+
+# Use `sort` instead of `sort_by { |x| x }`.
+Performance/RedundantSortBy:
+  Enabled: true
+
+# Use `start_with?` instead of a regex match anchored to the beginning of a
+# string.
+Performance/StartWith:
+  Enabled: true
+
+# Use `tr` instead of `gsub` when you are replacing the same number of
+# characters. Use `delete` instead of `gsub` when you are deleting
+# characters.
+Performance/StringReplacement:
+  Enabled: true
+
+# Checks for `.times.map` calls.
+Performance/TimesMap:
+  Enabled: true

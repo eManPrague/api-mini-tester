@@ -1,0 +1,5 @@
+# Dependencies in the gemspec should be alphabetically sorted
+# Configuration parameters: Include, TreatCommentsAsGroupSeparators.
+Gemspec/OrderedDependencies:
+  Include:
+    - '**/*.gemspec'

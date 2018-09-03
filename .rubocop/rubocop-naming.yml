@@ -1,0 +1,48 @@
+# Check the naming of accessor methods for get_/set_.
+Naming/AccessorMethodName:
+  Enabled: false
+
+# Use only ascii symbols in identifiers.
+Naming/AsciiIdentifiers:
+  Enabled: true
+
+# When defining binary operators, name the argument other.
+Naming/BinaryOperatorParameterName:
+  Enabled: true
+
+# Use CamelCase for classes and modules.'
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+
+# Constants should use SCREAMING_SNAKE_CASE.
+Naming/ConstantName:
+  Enabled: true
+
+# Use snake_case for source file names.
+Naming/FileName:
+  Enabled: true
+
+# Use the configured style when naming methods.
+Naming/MethodName:
+  Enabled: true
+
+# Use `spam?` instead of `is_spam?`
+# Configuration parameters: NamePrefix, NamePrefixBlacklist, NameWhitelist.
+# NamePrefix: is_, has_, have_
+# NamePrefixBlacklist: is_, has_, have_
+# NameWhitelist: is_a?
+Naming/PredicateName:
+  Enabled: true
+  NamePrefixBlacklist: is_
+  Exclude:
+    - 'spec/**/*'
+    - 'features/**/*'
+
+# Use the configured style when naming variables.
+Naming/VariableName:
+  EnforcedStyle: snake_case
+  Enabled: true
+
+# Use the configured style when numbering variables.
+Naming/VariableNumber:
+  Enabled: false

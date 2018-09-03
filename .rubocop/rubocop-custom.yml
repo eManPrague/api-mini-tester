@@ -1,0 +1,76 @@
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+    - 'lib/**/*.rb'
+    - 'lib/*rb'
+    - 'test/**/*rb'
+    - 'test/*.rb'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - '.bundle/**/*'
+    - 'bundle/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'test/test_helper.rb'
+
+Metrics/LineLength:
+  Max: 160
+Metrics/BlockLength:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 23
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Layout/EmptyLinesAroundBeginBody:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+Style/EmptyLines:
+  Enabled: false
+Layout/SpaceInsideReferenceBrackets:
+  Enabled: false
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Layout/CaseIndentation:
+  Enabled: false
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: false
+Layout/SpaceInsideStringInterpolation:
+  Enabled: false
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: false
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+Layout/AlignArray:
+  Enabled: false
+Layout/AlignHash:
+  Enabled: false
+Style/ExtraSpacing:
+  Enabled: false
+Style/SpaceInsideBrackets:
+  Enabled: false
+Rails/Output:
+  Enabled: false
+Security/YAMLLoad:
+  Enabled: false
+Style/PerlBackrefs:
+  Enabled: false
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+Style/RescueModifier:
+  Enabled: false
+Style/MultilineIfModifier:
+  Enabled: false

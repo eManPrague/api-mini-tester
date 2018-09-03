@@ -1,0 +1,58 @@
+name: "POST Form data example"
+desc: "Test suite POST Form example"
+settings:
+  baseurl: "https://api.example.com"
+tests:
+  - name: "Test scenario 1"
+    steps:
+    - step: 0
+      name: "Login"
+      desc: "Longer description"
+      uri: "api/login"
+      method: POST
+      input:
+        header:
+          X-App-Version: "HTTP/1.0, 1.2.3"
+        body:
+          login: "user"
+          pass: "pass"
+      output:
+        body:
+          x-some-meta: some-meta-information
+        status: 200
+        timing: 5
+    - step: 1
+      name: "Get numbers"
+      desc: "Longer description"
+      uri: "api/numbers"
+      method: GET
+      input:
+        header:
+          X-Api-Token: "{{ context[0]['token'] }}"
+      output:
+        body:
+          - "1"
+          - "2"
+          - "3"
+        status: 200
+        timing: 5
+    - step: 2
+      name: "Get templates"
+      desc: "Longer description"
+      uri: "api/templates"
+      method: GET
+      input:
+        header:
+          X-Api-Token: "{{ context[0]['token'] }}"
+      output:
+        body:
+          templates:
+            - documentType: "TEMPLATE1"
+            - documentType: "TEMPLATE2"
+            - documentType: "TEMPLATE3"
+          metadata:
+            - resolution: 1000
+              density: 100
+              code: "MyCode"
+        status: 200
+        timing: 5

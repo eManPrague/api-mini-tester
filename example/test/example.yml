@@ -1,0 +1,91 @@
+name: "All features example"
+desc: "Longer description"
+settings:
+  baseurl: "https://api.example.com"
+tests:
+  - name: "Test scenario login and avatar upload"
+    desc: "Longer description"
+    steps:
+    - step: 0
+      name: "GET user-info"
+      desc: "Longer description"
+      uri: "user/info"
+      method: GET
+      input:
+        header:
+          X-Api-Token: "WrongApiToken"
+        body: nil
+      output:
+        header:
+          server: "nginx"
+        status: 401
+    - step: 1
+      name: "Login with wrong password"
+      desc: "Longer description"
+      uri: "user/login"
+      method: POST
+      input:
+        header:
+          accept: application/json
+        body:
+          username: user007
+          password: WrongPassword
+      output:
+        header: nil
+        status: 401
+        body:
+          result: "Wrong username or password"
+    - step: 2
+      name: "Login with right password"
+      desc: "Longer description"
+      uri: "user/login"
+      method: POST
+      input:
+        header:
+          accept: application/json
+        body:
+          username: user007
+          password: RightPassword
+      output:
+        header: nil
+        status: 200
+        body:
+          result: "OK"
+    - step: 3
+      name: "POST form data"
+      desc: "Longer description"
+      uri: "user/info/avatar"
+      method: POST
+      input:
+        content_type: "multipart/form-data"
+        header:
+          X-Api-Token: "{{ context[2]['X-Api-Token'] }}"
+        body:
+          - type: input
+            name: alt
+            value: main-photo
+          - type: file
+            name: file.jpg
+            value: ./example/input/tiny.gif
+      output:
+        header: nil
+        status: 201
+        body:
+          result: OK
+    - step: 4
+      name: "Get and test array"
+      desc: "Longer description"
+      uri: "user/info"
+      method: GET
+      input:
+        header:
+          X-Api-Token: "{{ context[2]['X-Api-Token'] }}"
+        body: nil
+      output:
+        header: nil
+        status: 200
+        body:
+          permissions:
+            - read_user_data
+            - update_user_data
+          result: OK

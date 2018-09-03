@@ -1,0 +1,46 @@
+# This cop checks for the use of JSON class methods which have potential
+# security issues.
+Security/JSONLoad:
+  Enabled: true
+
+# This cop checks for the use of *Kernel#eval*.
+Security/Eval:
+  Enabled: true
+
+GitlabSecurity/DeepMunge:
+  Enabled: true
+  Exclude:
+    - 'lib/**/*.rake'
+    - 'spec/**/*'
+
+# To be enabled by https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13610
+GitlabSecurity/JsonSerialization:
+  Enabled: false
+
+GitlabSecurity/PublicSend:
+  Enabled: true
+  Exclude:
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'features/**/*'
+    - 'lib/**/*.rake'
+    - 'qa/**/*'
+    - 'spec/**/*'
+
+GitlabSecurity/RedirectToParamsUpdate:
+  Enabled: true
+  Exclude:
+    - 'lib/**/*.rake'
+    - 'spec/**/*'
+
+GitlabSecurity/SqlInjection:
+  Enabled: true
+  Exclude:
+    - 'lib/**/*.rake'
+    - 'spec/**/*'
+
+GitlabSecurity/SystemCommandInjection:
+  Enabled: true
+  Exclude:
+    - 'lib/**/*.rake'
+    - 'spec/**/*'

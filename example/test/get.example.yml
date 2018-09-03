@@ -1,0 +1,39 @@
+name: "GET example"
+desc: "Test suite GET example"
+settings:
+  baseurl: "https://api.example.com"
+tests:
+  - name: "Test scenario 1"
+    steps:
+    - step: 0
+      name: "GET some list"
+      desc: "Longer description"
+      uri: "items"
+      method: GET
+      input:
+        header:
+          From: "me@you.it"
+        body: nil
+      output:
+        header:
+          server: nginx
+        status: 200
+        body:
+          id: 1
+          name: "Item 1"
+    - step: 1
+      name: "Get some detail"
+      desc: "Longer description"
+      uri: "items/{{ context[0]['items'].first['id'] }}"
+      method: GET
+      input:
+        header:
+          From: "me@you.it"
+        body:
+          ItemId: "{{ context[0]['items'].first['id'] }}"
+      output:
+        header:
+          server: nginx
+        status: 200
+        body:
+          result: OK

@@ -1,0 +1,15 @@
+inherit_from:
+  - .rubocop/rubocop-all.yml
+  - .rubocop/rubocop-bundler.yml
+  - .rubocop/rubocop-gemspec.yml
+  - .rubocop/rubocop-layout.yml
+  - .rubocop/rubocop-lint.yml
+  - .rubocop/rubocop-metrics.yml
+  - .rubocop/rubocop-naming.yml
+  - .rubocop/rubocop-performance.yml
+  - .rubocop/rubocop-rails.yml
+  - .rubocop/rubocop-rspec.yml
+  - .rubocop/rubocop-security.yml
+  - .rubocop/rubocop-style.yml
+  - .rubocop/rubocop-custom.yml
+

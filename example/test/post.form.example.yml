@@ -1,0 +1,29 @@
+name: "POST Form data example"
+desc: "Test suite POST Form example"
+settings:
+  baseurl: "https://api.example.com/"
+tests:
+  - name: "Test scenario 1"
+    steps:
+    - step: 1
+      name: "POST form data example call"
+      desc: "Longer description"
+      uri: "14cutx81"
+      method: POST
+      input:
+        content_type: "multipart/form-data"
+        header:
+          From: "me@you.it"
+        body:
+          - type: input
+            name: type
+            value: VALUE_TYPE
+          - type: file
+            name: file.jpg
+            value: ./example/input/tiny.gif
+      output:
+        header:
+          server: nginx
+        status: 200
+        body:
+          result: OK

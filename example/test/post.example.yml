@@ -1,0 +1,27 @@
+name: "POST data example"
+desc: "Test suite POST example"
+settings:
+  baseurl: "https://api.example.com/"
+tests:
+  - name: "Test scenario 1"
+    steps:
+    - step: 1
+      name: "POST example call"
+      desc: "Longer description"
+      uri: "14cutx81"
+      method: POST
+      input:
+        content_type: "application/json"
+        header:
+          From: "me@you.it"
+        body:
+          function: "f1"
+          params:
+            - params1
+            - params2
+      output:
+        header:
+          server: nginx
+        status: 200
+        body:
+          result: OK

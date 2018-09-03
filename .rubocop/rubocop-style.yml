@@ -1,0 +1,319 @@
+# Use alias_method instead of alias.
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+  Enabled: true
+
+# Whether `and` and `or` are banned only in conditionals (conditionals)
+# or completely (always).
+Style/AndOr:
+  Enabled: true
+
+# Use `Array#join` instead of `Array#*`.
+Style/ArrayJoin:
+  Enabled: true
+
+# Use only ascii symbols in comments.
+Style/AsciiComments:
+  Enabled: true
+
+# Checks for uses of Module#attr.
+Style/Attr:
+  Enabled: true
+
+# Avoid the use of BEGIN blocks.
+Style/BeginBlock:
+  Enabled: true
+
+# Do not use block comments.
+Style/BlockComments:
+  Enabled: true
+
+# Avoid using {...} for multi-line blocks (multiline chaining is # always
+# ugly). Prefer {...} over do...end for single-line blocks.
+Style/BlockDelimiters:
+  Enabled: true
+
+ # This cop checks for braces around the last parameter in a method call
+# if the last parameter is a hash.
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+# This cop checks for uses of the case equality operator(===).
+Style/CaseEquality:
+  Enabled: false
+
+# Checks for uses of character literals.
+Style/CharacterLiteral:
+  Enabled: true
+
+# Checks style of children classes and modules.
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# Enforces consistent use of `Object#is_a?` or `Object#kind_of?`.
+Style/ClassCheck:
+  Enabled: true
+
+# Use self when defining module/class methods.
+Style/ClassMethods:
+  Enabled: true
+
+# Avoid the use of class variables.
+Style/ClassVars:
+  Enabled: true
+
+# This cop checks for methods invoked via the :: operator instead
+# of the . operator (like FileUtils::rmdir instead of FileUtils.rmdir).
+Style/ColonMethodCall:
+  Enabled: true
+
+# This cop checks that comment annotation keywords are written according
+# to guidelines.
+Style/CommentAnnotation:
+  Enabled: false
+
+# Check for `if` and `case` statements where each branch is used for
+# assignment to the same variable when using the return of the
+# condition can be used instead.
+Style/ConditionalAssignment:
+  Enabled: true
+
+# Use def with parentheses when there are arguments.
+Style/DefWithParentheses:
+  Enabled: true
+
+# Document classes and non-namespace modules.
+Style/Documentation:
+  Enabled: false
+
+# This cop checks for uses of double negation (!!) to convert something
+# to a boolean value. As this is both cryptic and usually redundant, it
+# should be avoided.
+Style/DoubleNegation:
+  Enabled: false
+
+# Avoid the use of END blocks.
+Style/EndBlock:
+  Enabled: true
+
+# Favor the use of Fixnum#even? && Fixnum#odd?
+Style/EvenOdd:
+  Enabled: true
+
+# Checks for flip flops.
+Style/FlipFlop:
+  Enabled: true
+
+# Checks use of for or each in multiline loops.
+Style/For:
+  Enabled: true
+
+# Use a consistent style for format string tokens.
+Style/FormatStringToken:
+  Enabled: false
+
+# Checks if there is a magic comment to enforce string literals
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Do not introduce global variables.
+Style/GlobalVars:
+  Enabled: true
+  Exclude:
+    - 'lib/backup/**/*'
+    - 'lib/tasks/**/*'
+
+# Prefer Ruby 1.9 hash syntax `{ a: 1, b: 2 }`
+# over 1.8 syntax `{ :a => 1, :b => 2 }`.
+Style/HashSyntax:
+  Enabled: true
+
+# Checks that conditional statements do not have an identical line at the
+# end of each branch, which can validly be moved out of the conditional.
+Style/IdenticalConditionalBranches:
+  Enabled: true
+
+# Do not use if x; .... Use the ternary operator instead.
+Style/IfWithSemicolon:
+  Enabled: true
+
+# Use Kernel#loop for infinite loops.
+Style/InfiniteLoop:
+  Enabled: true
+
+# Use the inverse method instead of `!.method`
+# if an inverse method is defined.
+Style/InverseMethods:
+  Enabled: false
+
+# Use lambda.call(...) instead of lambda.(...).
+Style/LambdaCall:
+  Enabled: true
+
+# Checks if the method definitions have or don't have parentheses.
+Style/MethodDefParentheses:
+  Enabled: true
+
+# Checks for usage of `extend self` in modules.
+Style/ModuleFunction:
+  Enabled: false
+
+# Avoid multi-line chains of blocks.
+Style/MultilineBlockChain:
+  Enabled: true
+
+# Do not use then for multi-line if/unless.
+Style/MultilineIfThen:
+  Enabled: true
+
+# Avoid multi-line `? :` (the ternary operator), use if/unless instead.
+Style/MultilineTernaryOperator:
+  Enabled: true
+
+# Avoid comparing a variable with multiple items in a conditional,
+# use Array#include? instead.
+Style/MultipleComparison:
+  Enabled: false
+
+# This cop checks whether some constant value isn't a
+# mutable literal (e.g. array or hash).
+Style/MutableConstant:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/**/*'
+    - 'db/post_migrate/**/*'
+    - 'db/geo/migrate/**/*'
+
+# Favor unless over if for negative conditions (or control flow or).
+Style/NegatedIf:
+  Enabled: true
+
+# Avoid using nested modifiers.
+Style/NestedModifier:
+  Enabled: true
+
+# Use one expression per branch in a ternary operator.
+Style/NestedTernaryOperator:
+  Enabled: true
+
+# Prefer x.nil? to x == nil.
+Style/NilComparison:
+  Enabled: true
+
+# Checks for redundant nil checks.
+Style/NonNilCheck:
+  Enabled: true
+
+# Use ! instead of not.
+Style/Not:
+  Enabled: true
+
+# Add underscores to large numeric literals to improve their readability.
+Style/NumericLiterals:
+  Enabled: false
+
+# Favor the ternary operator(?:) over if/then/else/end constructs.
+Style/OneLineConditional:
+  Enabled: true
+
+# Don't use parentheses around the condition of an if/unless/while.
+Style/ParenthesesAroundCondition:
+  Enabled: true
+
+# This cop (by default) checks for uses of methods Hash#has_key? and
+# Hash#has_value? where it enforces Hash#key? and Hash#value?
+# It is configurable to enforce the inverse, using `verbose` method
+# names also.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: short, verbose
+Style/PreferredHashMethods:
+  Enabled: false
+
+# Checks for an obsolete RuntimeException argument in raise/fail.
+Style/RedundantException:
+  Enabled: true
+
+# Checks for parentheses that seem not to serve any purpose.
+Style/RedundantParentheses:
+  Enabled: true
+
+# Don't use semicolons to terminate expressions.
+Style/Semicolon:
+  Enabled: true
+
+# Checks for proper usage of fail and raise.
+Style/SignalException:
+  EnforcedStyle: only_raise
+  Enabled: true
+
+# Check for the usage of parentheses around stabby lambda arguments.
+Style/StabbyLambdaParentheses:
+  EnforcedStyle: require_parentheses
+  Enabled: true
+
+# Checks if uses of quotes match the configured preference.
+Style/StringLiterals:
+  Enabled: false
+
+# Checks if configured preferred methods are used over non-preferred.
+Style/StringMethods:
+  PreferredMethods:
+    intern: to_sym
+  Enabled: true
+
+# Use %i or %I for arrays of symbols.
+Style/SymbolArray:
+  Enabled: false
+
+# This cop checks for trailing comma in array and hash literals.
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: no_comma
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: no_comma
+
+# This cop checks for trailing comma in argument lists.
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: no_comma
+
+# Checks for %W when interpolation is not needed.
+Style/UnneededCapitalW:
+  Enabled: true
+
+# Checks for %q/%Q when single quotes or double quotes would do.
+Style/UnneededPercentQ:
+  Enabled: false
+
+# Don't interpolate global, instance and class variables directly in strings.
+Style/VariableInterpolation:
+  Enabled: true
+
+# Use when x then ... for one-line cases.
+Style/WhenThen:
+  Enabled: true
+
+# Checks for redundant do after while or until.
+Style/WhileUntilDo:
+  Enabled: true
+
+# Favor modifier while/until usage when you have a single-line body.
+Style/WhileUntilModifier:
+  Enabled: true
+
+# Use %w or %W for arrays of words.
+Style/WordArray:
+  Enabled: true
+
+# Do not use literals as the first operand of a comparison.
+Style/YodaCondition:
+  Enabled: false
+
+# Use `proc` instead of `Proc.new`.
+Style/Proc:
+  Enabled: true
+
+# Prefer `var, _ = call` over `var, = call`
+Style/TrailingUnderscoreVariable:
+  Enabled: false

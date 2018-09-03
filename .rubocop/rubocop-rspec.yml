@@ -1,0 +1,143 @@
+# Check that instances are not being stubbed globally.
+RSpec/AnyInstance:
+  Enabled: false
+
+# Check for expectations where `be(...)` can replace `eql(...)`.
+RSpec/BeEql:
+  Enabled: true
+
+# We don't enforce this as we use this technique in a few places.
+RSpec/BeforeAfterAll:
+  Enabled: false
+
+# Check that the first argument to the top level describe is the tested class or
+# module.
+RSpec/DescribeClass:
+  Enabled: false
+
+# Checks that the second argument to `describe` specifies a method.
+RSpec/DescribeMethod:
+  Enabled: false
+
+# Avoid describing symbols.
+RSpec/DescribeSymbol:
+  Enabled: true
+
+# Checks that tests use `described_class`.
+RSpec/DescribedClass:
+  Enabled: true
+
+# Checks if an example group does not include any tests.
+RSpec/EmptyExampleGroup:
+  Enabled: true
+  CustomIncludeMethods:
+    - run_permission_checks
+    - run_group_permission_checks
+    - it_should_email!
+    - it_should_not_email!
+
+# Checks for long example.
+RSpec/ExampleLength:
+  Enabled: false
+  Max: 5
+
+# Do not use should when describing your tests.
+RSpec/ExampleWording:
+  Enabled: false
+  CustomTransform:
+    be: is
+    have: has
+    not: does not
+  IgnoredWords: []
+
+# Checks for `expect(...)` calls containing literal values.
+RSpec/ExpectActual:
+  Enabled: true
+
+# Checks for opportunities to use `expect { … }.to output`.
+RSpec/ExpectOutput:
+  Enabled: true
+
+# Checks the file and folder naming of the spec file.
+RSpec/FilePath:
+  Enabled: true
+  IgnoreMethods: true
+  Exclude:
+    - 'qa/**/*'
+    - 'spec/javascripts/fixtures/*'
+    - 'spec/requests/api/v3/*'
+
+# Checks if there are focused specs.
+RSpec/Focus:
+  Enabled: true
+
+# Checks the arguments passed to `before`, `around`, and `after`.
+RSpec/HookArgument:
+  Enabled: true
+  EnforcedStyle: implicit
+
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: is_expected, should
+RSpec/ImplicitExpect:
+  Enabled: true
+  EnforcedStyle: is_expected
+
+# Checks for the usage of instance variables.
+RSpec/InstanceVariable:
+  Enabled: false
+
+# Checks for `subject` definitions that come after `let` definitions.
+RSpec/LeadingSubject:
+  Enabled: false
+
+# Checks unreferenced `let!` calls being used for test setup.
+RSpec/LetSetup:
+  Enabled: false
+
+# Check that chains of messages are not being stubbed.
+RSpec/MessageChain:
+  Enabled: false
+
+# Checks that message expectations are set using spies.
+RSpec/MessageSpies:
+  Enabled: false
+
+# Checks for multiple top-level describes.
+RSpec/MultipleDescribes:
+  Enabled: false
+
+# Checks if examples contain too many `expect` calls.
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# Checks for explicitly referenced test subjects.
+RSpec/NamedSubject:
+  Enabled: false
+
+# Checks for nested example groups.
+RSpec/NestedGroups:
+  Enabled: false
+
+# Enforces the usage of the same method on all negative message expectations.
+RSpec/NotToNot:
+  EnforcedStyle: not_to
+  Enabled: true
+
+# Check for repeated description strings in example groups.
+RSpec/RepeatedDescription:
+  Enabled: false
+
+# Ensure RSpec hook blocks are always multi-line.
+RSpec/SingleLineHook:
+  Enabled: true
+  Exclude:
+    - 'spec/factories/*'
+    - 'spec/requests/api/v3/*'
+
+# Checks for stubbed test subjects.
+RSpec/SubjectStub:
+  Enabled: false
+
+# Prefer using verifying doubles over normal doubles.
+RSpec/VerifiedDoubles:
+  Enabled: false
