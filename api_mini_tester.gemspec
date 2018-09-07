@@ -1,12 +1,17 @@
 Gem::Specification.new do |s|
   s.name        = 'api_mini_tester'
-  s.version     = '0.1.4'
-  s.date        = '2018-09-02'
+  s.version     = '0.1.5'
+  s.date        = '2018-09-07'
   s.summary     = "Runs automated REST API based on YAML definition"
   s.description = "Runs automated REST API based on YAML definition"
   s.authors     = ["Jindrich Skupa (@eMan)"]
   s.email       = 'jindrich.skupa@gmail.com'
-  s.files       = ["lib/api_mini_tester.rb", "lib/api_mini_tester/test_suite.rb", "lib/api_mini_tester/test_scenario.rb", "lib/api_mini_tester/test_step.rb", "lib/api_mini_tester/test_formatter.rb"]
+  s.files       = ["lib/api_mini_tester.rb",
+                   "lib/api_mini_tester/test_suite.rb",
+                   "lib/api_mini_tester/test_scenario.rb",
+                   "lib/api_mini_tester/test_step.rb",
+                   "lib/api_mini_tester/test_formatter.rb",
+                   "lib/api_mini_tester/test_faker_filter.rb"]
   s.homepage    = 'http://rubygems.org/gems/api_mini_tester'
   s.license     = 'MIT'
   s.add_runtime_dependency 'builder', '~> 3.0', '>= 3.0.4'

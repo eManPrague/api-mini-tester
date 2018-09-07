@@ -1,3 +1,17 @@
+# api-mini-tester (0.1.5) RELEASED
+
+  * Add FakerFilter eq. faker support
+  * Add contribution guide
+  * Add travis into project
+  * Push dependencies into versions on release
+  * Resolve rubocop offends
+  * Update README.MD
+  * Update test data, use faker in examples a update README.MD
+
+Authors
+
+* Jindrich Skupa
+
 # api-mini-tester (0.1.4) RELEASED
 
   * Add asserts refute conversion for MiniTest

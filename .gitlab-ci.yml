@@ -35,6 +35,7 @@ publish:
   script:
     - ./publish.sh
     - ./release.sh
+    - ./dependencies.sh
   only:
     - tags
   tags:

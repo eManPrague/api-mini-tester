@@ -17,8 +17,8 @@ tests:
         body:
           function: "f1"
           params:
-            - params1
-            - params2
+            - "{{ 'Internet.email' | fake }}"
+            - "{{ 'Internet.password(8)' | fake }}"
       output:
         header:
           server: nginx

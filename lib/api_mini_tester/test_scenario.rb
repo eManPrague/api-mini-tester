@@ -3,7 +3,7 @@ require_relative 'test_step'
 module ApiMiniTester
   class TestScenario
 
-    attr_accessor :base_uri, :scenario, :data, :results, :name
+    attr_reader :base_uri, :scenario, :data, :results, :name
 
     def initialize(base_uri, scenario, data)
       @base_uri = base_uri

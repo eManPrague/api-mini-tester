@@ -5,7 +5,7 @@ PATH
 PATH
   remote: .
   specs:
-    api_mini_tester (0.1.4)
+    api_mini_tester (0.1.5)
       builder (~> 3.0, >= 3.0.4)
       faker (~> 1.8, >= 1.8.7)
       hash_parser (~> 0.0, >= 0.0.2)

@@ -12,7 +12,8 @@ class SuiteHashTest < SuiteTest
     .with(
       headers: {
         'Content-Type' => 'application/json',
-        'From' => 'me@you.it'
+        'From' => 'me@you.it',
+        'Count' => '8'
       })
     .to_return(status: 200, body: "", headers: {})
     @suite.run_scenarios

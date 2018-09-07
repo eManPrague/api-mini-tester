@@ -26,4 +26,4 @@ Desc: Longer description
 
 #### Timing
 
-* `true`: Expected request time Infinity, real time 0.013036
+* `true`: Expected request time Infinity, real time 0.01112

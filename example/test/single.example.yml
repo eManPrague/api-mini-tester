@@ -16,6 +16,7 @@ tests:
       input:
         header:
           From: "{{ data['from'] }}"
+          Count: "{{ 'Number.between(8, 8)' | fake }}"
         body: nil
       output:
         header:

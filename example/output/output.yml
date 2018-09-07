@@ -29,6 +29,6 @@
     :timing:
     - :result: true
       :name: Request time < Infinity
-      :desc: Expected request time Infinity, real time 0.013036
+      :desc: Expected request time Infinity, real time 0.01112
       :exp: Not Specified
-      :real: 0.013036
+      :real: 0.01112

@@ -2,7 +2,7 @@
 
 Gem to run API (REST/JSON) test scenarios defined by YAML file with many output formats. 
 Just create simple API calls definition in YAML with output validations. 
-Use common data section, send multipart content and use previous reponses in next call.
+Use prepared static or [fake](https://github.com/stympy/faker) data, send multipart content or use previous reponses in calls.
 
 ## Badges
 
@@ -48,15 +48,37 @@ tests:
       method: GET
       input:
         header:
+          # use value from global data section
           From: "{{ data['from'] }}"
+          # use Faker, choose method with params withou 'Faker' module namespace and use filter fake
+          Count: "{{ 'Number.between(1, 10)' | fake }}"
         body: nil
       output:
+        # assert headers
         header:
           server: "nginx"
+        # assert http return code
         status: 200
+        # assert body content
         body:
-          id: 1
+        - id: 1
           name: "Item 1"
+    - step: 1
+      name: "Get item detail"
+      desc: "Longer description"
+      # use data returned in some previous step
+      uri: "items/{{ context[0].first['id'] }}"
+      method: GET
+      input:
+        header:
+          From: "{{ data['from'] }}"
+        body:
+      output:
+        header: nil
+        body:
+          name: "Item 1"
+        status:200
+       
 ```
 
 ## Example run

@@ -5,7 +5,7 @@ require_relative 'test_formatter'
 module ApiMiniTester
   class TestSuite
 
-    attr_accessor :base_uri, :scenarios, :data, :results
+    attr_reader :base_uri, :scenarios, :data, :results
 
     def initialize(suite_def)
       if suite_def.is_a?(String)

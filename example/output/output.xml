@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Test scenario 1" timestamp="2018-09-02T17:15:57+02:00" hostname="harriet.local" tests="3" skipped="0" failures="0" errors="0" time="0.013036">
-    <testcase classname="GetSomeList" name="Response code == 200" time="0.013036" file="./GetSomeList.rb">
+  <testsuite name="Test scenario 1" timestamp="2018-09-06T23:37:40+02:00" hostname="harriet.local" tests="3" skipped="0" failures="0" errors="0" time="0.01112">
+    <testcase classname="GetSomeList" name="Response code == 200" time="0.01112" file="./GetSomeList.rb">
     </testcase>
-    <testcase classname="GetSomeList" name="Header value: server == nginx" time="0.013036" file="./GetSomeList.rb">
+    <testcase classname="GetSomeList" name="Header value: server == nginx" time="0.01112" file="./GetSomeList.rb">
     </testcase>
-    <testcase classname="GetSomeList" name="Request time &lt; Infinity" time="0.013036" file="./GetSomeList.rb">
+    <testcase classname="GetSomeList" name="Request time &lt; Infinity" time="0.01112" file="./GetSomeList.rb">
     </testcase>
   </testsuite>
 </testsuites>

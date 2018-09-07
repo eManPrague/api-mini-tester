@@ -2,8 +2,9 @@ require 'httparty'
 require 'liquid'
 require 'hash_parser'
 require 'uri'
-require 'faker'
 require 'json'
+require_relative 'test_faker_filter'
+
 
 module ApiMiniTester
   class TestStep
@@ -16,17 +17,23 @@ module ApiMiniTester
     attr_reader :results
 
     def initialize(base_uri, step, context = nil, data = nil)
+      Liquid::Template.register_filter(::TestFakerFilter)
       @context = context
       uri_template = Liquid::Template.parse([base_uri, step['uri']].join("/"), error_mode: :strict)
       @name = step['name']
-      @uri = uri_template.render({'context' => context, 'data' => data}, { strict_variables: true })
+
+      @uri = uri_template.render(
+        {'context' => context, 'data' => data},
+        { strict_variables: true })
       @method = step['method'].downcase.to_sym
 
       input_template = Liquid::Template.parse(step['input'].to_yaml.to_s, error_mode: :strict)
-      @input = YAML.load(input_template.render({'context' => context, 'data' => data}, { strict_variables: true }))
+      @input = YAML.load(
+        input_template.render({'context' => context, 'data' => data}, { strict_variables: true }))
 
       output_template = Liquid::Template.parse(step['output'].to_yaml.to_s, error_mode: :strict)
-      @output = YAML.load(output_template.render({'context' => context, 'data' => data}, { strict_variables: true }))
+      @output = YAML.load(
+        output_template.render({'context' => context, 'data' => data}, { strict_variables: true }))
 
       @results = { name: step['name'], desc: step['desc'], status: [], headers: [], body: [], url: [], method: [], timing: [] }
     end
@@ -154,7 +161,11 @@ module ApiMiniTester
 
     def array_diff(a, b, path = nil, section = :body)
       a.each do |a_item|
-        if a_item.instance_of?(Hash)
+        if b.nil?
+          add_result section, { result: false,
+            name: "Response boby value: #{[path].join(".")}",
+            desc: "Assert #{[path].join(".")} is empty" }
+        elsif a_item.instance_of?(Hash)
           found = false
           b.each do |b_item|
             matching = true
