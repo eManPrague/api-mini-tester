@@ -1,21 +1,18 @@
 Gem::Specification.new do |s|
   s.name        = 'api_mini_tester'
-  s.version     = '0.1.5'
-  s.date        = '2018-09-07'
+  s.version     = '0.1.7'
+  s.date        = '2018-09-12'
   s.summary     = "Runs automated REST API based on YAML definition"
   s.description = "Runs automated REST API based on YAML definition"
   s.authors     = ["Jindrich Skupa (@eMan)"]
   s.email       = 'jindrich.skupa@gmail.com'
-  s.files       = ["lib/api_mini_tester.rb",
-                   "lib/api_mini_tester/test_suite.rb",
-                   "lib/api_mini_tester/test_scenario.rb",
-                   "lib/api_mini_tester/test_step.rb",
-                   "lib/api_mini_tester/test_formatter.rb",
-                   "lib/api_mini_tester/test_faker_filter.rb"]
+  s.executables << 'api_mini_tester'
+  s.files       = Dir['lib/**/*']
   s.homepage    = 'http://rubygems.org/gems/api_mini_tester'
   s.license     = 'MIT'
   s.add_runtime_dependency 'builder', '~> 3.0', '>= 3.0.4'
   s.add_runtime_dependency 'faker', '~> 1.8', '>= 1.8.7'
+  s.add_runtime_dependency 'cz_faker', '~> 0.0.1', '>= 0.0.1'
   s.add_runtime_dependency 'hash_parser', '~> 0.0', '>= 0.0.2'
   s.add_runtime_dependency 'httparty', '~> 0.16', '>= 0.16.0'
   s.add_runtime_dependency 'liquid', '~> 4.0', '>= 4.0.0'

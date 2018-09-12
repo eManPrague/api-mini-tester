@@ -1,8 +1,8 @@
 # api-mini-tester
 
-Gem to run API (REST/JSON) test scenarios defined by YAML file with many output formats. 
-Just create simple API calls definition in YAML with output validations. 
-Use prepared static or [fake](https://github.com/stympy/faker) data, send multipart content or use previous reponses in calls.
+Gem to run API (REST/JSON) test scenarios defined by YAML file with many output formats.
+Just create simple API calls definition in YAML with output validations.
+Use prepared static or [fake](http://rubygems.org/gems/faker)/ or [cz_fake](http://rubygems.org/gems/cz_faker) data, send multipart content or use previous reponses in calls.
 
 ## Badges
 
@@ -50,7 +50,7 @@ tests:
         header:
           # use value from global data section
           From: "{{ data['from'] }}"
-          # use Faker, choose method with params withou 'Faker' module namespace and use filter fake
+          # use Faker, choose method with params without 'Faker' module namespace and use filter fake
           Count: "{{ 'Number.between(1, 10)' | fake }}"
         body: nil
       output:
@@ -77,8 +77,23 @@ tests:
         header: nil
         body:
           name: "Item 1"
-        status:200
-       
+        status: 200
+    - step: 2
+      name: "Update item detail"
+      desc: "Longer description"
+      # use data returned in some previous step
+      uri: "items/{{ context[0].first['id'] }}"
+      method: PUT
+      input:
+        header:
+          From: "{{ data['from'] }}"
+        body:
+          # use CzFaker, choose method with params without 'CzFaker' module namespace and use filter cz_fake
+          name: "{{ 'Name.name(:female)' | cz_fake }}"
+      output:
+        header: nil
+        body: nil
+        status: 200
 ```
 
 ## Example run
@@ -205,4 +220,3 @@ curl -X POST --header "X-Api-Token:$VIPER_API_TOKEN" \
   --header "X-Api-Ref:$CI_COMMIT_REF_SLUG" \
   "https://viper.dev.eman.cz/api/tests?service=apiminitester"
 ```
-

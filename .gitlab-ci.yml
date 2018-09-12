@@ -33,9 +33,9 @@ test:
 publish:
   stage: publish
   script:
-    - ./publish.sh
-    - ./release.sh
-    - ./dependencies.sh
+    - ./script/publish.sh
+    - ./script/release.sh
+    - ./script/dependencies.sh
   only:
     - tags
   tags:

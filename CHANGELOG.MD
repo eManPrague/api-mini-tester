@@ -1,3 +1,11 @@
+# api-mini-tester (0.1.7) RELEASED
+
+
+
+Authors
+
+
+
 # api-mini-tester (0.1.5) RELEASED
 
   * Add FakerFilter eq. faker support
