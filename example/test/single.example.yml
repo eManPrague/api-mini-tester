@@ -2,6 +2,10 @@ name: "GET example"
 desc: "Test suite GET example"
 settings:
   baseurl: "https://api.example.com"
+defaults:
+  input:
+    header:
+      User-Agent: 'Api-Mini-Tester-Agent'
 data:
   from:
     "me@you.it"
@@ -13,11 +17,18 @@ tests:
       desc: "Longer description"
       uri: "items"
       method: GET
+      sleep:
+        before:
+          value: 0.5
+        after:
+          distribution: norm
+          mean: 1
+          sigma: 1
       input:
         header:
           From: "{{ data['from'] }}"
           Count: "{{ 'Number.between(8, 8)' | fake }}"
-        body: nil
+        body: 
       output:
         header:
           server: "nginx"
@@ -25,3 +36,28 @@ tests:
         body:
           id: 1
           name: "Item 1"
+    - step: 1
+      name: "GET some list"
+      desc: "Longer description"
+      uri: "items"
+      method: GET
+      sleep:
+        before:
+          distribution: static
+          value: 1
+        after:
+          distribution: uniform
+          min: 0
+          max: 2
+      input:
+        header:
+          From: "{{ data['from'] }}"
+          Count: "{{ 'Number.between(8, 8)' | fake }}"
+        body: 
+      output:
+        header:
+          server: "nginx"
+        status: 200
+        body:
+          id: 1
+          name: "Item 1"         

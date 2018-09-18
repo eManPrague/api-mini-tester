@@ -3,8 +3,8 @@ require 'liquid'
 require 'hash_parser'
 require 'uri'
 require 'json'
+require 'distribution'
 require_relative 'test_faker_filter'
-
 
 module ApiMiniTester
   class TestStep
@@ -12,15 +12,27 @@ module ApiMiniTester
     include HTTParty
 
     SUPPORTED_METHODS = %i[ get post put delete ].freeze
+    SUPPORTED_RANDOM_DISTRIBUTION = %w[ static norm uniform ].freeze
 
-    attr_accessor :uri, :method, :name, :input, :output
-    attr_reader :results
+    attr_accessor :name, :input, :output
+    attr_reader :results, :sleeps, :method, :uri
 
-    def initialize(base_uri, step, context = nil, data = nil)
+    def initialize(base_uri, step, context = nil, data = nil, defaults = nil)
+      step = step.deep_merge!(defaults) do |key, this_val, other_val|
+        if this_val.nil?
+          other_val
+        elsif this_val.is_a?(Array)
+          (this_val + other_val)
+        else
+          this_val
+        end
+      end if defaults
+
       Liquid::Template.register_filter(::TestFakerFilter)
       @context = context
       uri_template = Liquid::Template.parse([base_uri, step['uri']].join("/"), error_mode: :strict)
       @name = step['name']
+      @sleeps = step['sleep']
 
       @uri = uri_template.render(
         {'context' => context, 'data' => data},
@@ -40,9 +52,11 @@ module ApiMiniTester
 
     def valid?
       return false if uri.nil? || uri.empty?
+
       return false unless URI.parse(uri) rescue false
       return false unless SUPPORTED_METHODS.include? method
       return false if @name.nil? || @name.empty?
+
       true
     end
 
@@ -51,6 +65,7 @@ module ApiMiniTester
     end
 
     def headers
+      @input['header'] = {} unless @input['header']
       @input['header']['Content-type'] = content_type if content_type == 'application/json'
       @input['header']
     end
@@ -92,6 +107,10 @@ module ApiMiniTester
     end
 
     def run_step
+      if sleeps
+        step_sleep(sleeps['before']) if sleeps['before']
+      end
+
       @timing = Time.now
       case method
       when :get
@@ -104,6 +123,10 @@ module ApiMiniTester
         response = HTTParty.delete(uri, headers: headers)
       end
       @timing = Time.now - @timing
+
+      if sleeps
+        step_sleep(sleeps['after']) if sleeps['after']
+      end
 
       add_result :url, { result: true, desc: "Url: #{uri}" }
       add_result :method, { result: true, desc: "Method: #{method}" }
@@ -126,6 +149,23 @@ module ApiMiniTester
       @results[section] << result
     end
 
+    def step_sleep(params)
+      params['distribution'] = 'static' unless SUPPORTED_RANDOM_DISTRIBUTION.include?(params['distribution'])
+
+      t = begin
+        case params['distribution']
+        when 'static'
+          params['value']
+        when 'norm'
+          Distribution::Normal.rng(params['mean'], params['sigma'], srand).call
+        when 'uniform'
+          Random.new.rand(params['max'] - params['min']) + params['min']
+        end
+      end
+      puts "Sleeping for #{t} seconds"
+      sleep(t.to_f.abs) if t
+    end
+
     def assert_timing(runtime, limit = nil)
       limit ||= Float::INFINITY
       add_result :timing, { result: (runtime < limit),
@@ -143,6 +183,7 @@ module ApiMiniTester
 
     def assert_headers(response, output)
       return if output.nil?
+
       output.each do |k, v|
         add_result :headers, { result: (v == response[k]),
                                name: "Header value: #{k} == #{v}",
@@ -189,6 +230,7 @@ module ApiMiniTester
 
     def hash_diff(a, b, path = nil, section = :body)
       return nil if a.nil? || b.nil?
+
       a.each_key do |k, v|
         current_path = [path, k].join('.')
         if b[k].nil?
@@ -206,5 +248,29 @@ module ApiMiniTester
         end
       end
     end
+  end
+end
+
+class Hash
+  def deep_merge(other_hash, &block)
+    dup.deep_merge!(other_hash, &block)
+  end
+
+  def deep_merge!(other_hash, &block)
+    other_hash.each_pair do |current_key, other_value|
+      this_value = self[current_key]
+
+      self[current_key] = begin
+        if   this_value.is_a?(Hash) && other_value.is_a?(Hash)
+          this_value.deep_merge(other_value, &block)
+        elsif block_given? && key?(current_key)
+          block.call(current_key, this_value, other_value) # rubocop:disable Performance/RedundantBlockCall
+        else
+          other_value
+        end
+      end
+    end
+
+    self
   end
 end

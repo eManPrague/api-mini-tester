@@ -38,6 +38,11 @@ settings:
   baseurl: "https://api.example.com"
 data:
   from: me@you.it
+# default for each request, will be merged into step definition before expansion
+defaults:
+  input:
+    header:
+      User-Agent: 'Api-mini-tester-agent'
 tests:
   - name: "Test scenario 1"
     steps:
@@ -46,6 +51,18 @@ tests:
       desc: "Longer description"
       uri: "items"
       method: GET
+      sleep:
+        # sleep before call for 10s
+        before:
+          value: 10
+        # sleep after call for random time - normal distribution with params
+        # static: value
+        # norm: mean, sigma
+        # uniform: min, max
+        after:
+          distribution: norm
+          mean: 5
+          sigma: 1
       input:
         header:
           # use value from global data section

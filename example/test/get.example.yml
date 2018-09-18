@@ -13,7 +13,7 @@ tests:
       input:
         header:
           From: "me@you.it"
-        body: nil
+        body: 
       output:
         header:
           server: nginx

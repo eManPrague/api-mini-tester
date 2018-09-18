@@ -5,7 +5,7 @@ require_relative 'test_formatter'
 module ApiMiniTester
   class TestSuite
 
-    attr_reader :base_uri, :scenarios, :data, :results
+    attr_reader :base_uri, :scenarios, :data, :results, :defaults
 
     def initialize(suite_def)
       if suite_def.is_a?(String)
@@ -19,6 +19,7 @@ module ApiMiniTester
     def valid?
       return false if base_uri.nil? || base_uri.empty?
       return false if scenarios.nil? || scenarios.empty?
+
       true
     end
 
@@ -26,12 +27,13 @@ module ApiMiniTester
       @base_uri = @test['settings']['baseurl']
       @scenarios = @test['tests']
       @data = @test['data']
+      @defaults = @test['defaults']
       @results = {name: @test['name'], desc: @test['desc'], scenarios: []}
     end
 
     def run_scenarios
       scenarios.each do |scenario|
-        runner = TestScenario.new(base_uri, scenario, data)
+        runner = TestScenario.new(base_uri, scenario, data, defaults)
         runner.run_scenario
         @results[:scenarios] << runner.results
       end

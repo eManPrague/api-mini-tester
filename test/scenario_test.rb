@@ -8,7 +8,8 @@ class ScenarioTest < Minitest::Test
     @suite = YAML.load(File.open('example/test/single.example.yml'))
     @base_uri = @suite['settings']['baseurl']
     @data = @suite['data']
-    @scenario = ApiMiniTester::TestScenario.new(@base_uri, @suite['tests'].first, @data)
+    @defaults = @suite['defaults']
+    @scenario = ApiMiniTester::TestScenario.new(@base_uri, @suite['tests'].first, @data, @defaults)
     stub_request(:get, "https://api.example.com/items")
     .with(
       headers: {

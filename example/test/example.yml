@@ -14,7 +14,7 @@ tests:
       input:
         header:
           X-Api-Token: "WrongApiToken"
-        body: nil
+        body:
       output:
         header:
           server: "nginx"
@@ -24,6 +24,15 @@ tests:
       desc: "Longer description"
       uri: "user/login"
       method: POST
+      sleep:
+        before:
+          distribution: uniform
+          min: 1
+          max: 3
+        after:
+          distribution: norm
+          mean: 5
+          sigma: 1
       input:
         header:
           accept: application/json
@@ -31,7 +40,7 @@ tests:
           username: user007
           password: WrongPassword
       output:
-        header: nil
+        header: 
         status: 401
         body:
           result: "Wrong username or password"
@@ -40,6 +49,9 @@ tests:
       desc: "Longer description"
       uri: "user/login"
       method: POST
+      sleep:
+        before:
+          value: 10
       input:
         header:
           accept: application/json
@@ -47,7 +59,7 @@ tests:
           username: user007
           password: RightPassword
       output:
-        header: nil
+        header: 
         status: 200
         body:
           result: "OK"
@@ -68,7 +80,7 @@ tests:
             name: file.jpg
             value: ./example/input/tiny.gif
       output:
-        header: nil
+        header: 
         status: 201
         body:
           result: OK
@@ -80,9 +92,9 @@ tests:
       input:
         header:
           X-Api-Token: "{{ context[2]['X-Api-Token'] }}"
-        body: nil
+        body: 
       output:
-        header: nil
+        header: 
         status: 200
         body:
           permissions:

@@ -1,3 +1,12 @@
+# api-mini-tester (0.1.8) RELEASED
+
+  * Add support for defaults merged into step definition
+  * Add support for sleeps before/after step API call
+
+Authors
+
+* Jindrich Skupa
+
 # api-mini-tester (0.1.7) RELEASED
 
 
