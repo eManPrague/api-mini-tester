@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'api_mini_tester/import'
+
+begin
+  puts "usage: api_mini_tester [input_file.json] [output_file.yaml]"
+  exit 1
+end if ARGV.count != 2
+
+input_file = ARGV[0]
+output_file = ARGV[1]
+
+postman_json = File.read(input_file)
+importer = ApiMiniTester::Import::Postman.new postman_json
+File.open(output_file, "w+").write(importer.to_yaml)

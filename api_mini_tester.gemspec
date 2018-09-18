@@ -1,13 +1,14 @@
 Gem::Specification.new do |s|
   s.name        = 'api_mini_tester'
-  s.version     = '0.1.8'
-  s.date        = '2018-09-12'
+  s.version     = '0.1.9'
+  s.date        = '2018-09-18'
   s.summary     = "Runs automated REST API based on YAML definition"
-  s.description = "Runs automated REST API based on YAML definition"
+  s.description = "Runs automated REST API based on YAML definition. Uses templates for API requests, mock data with faker and cz_faker and context data. Supports Postman collection export for conversion."
   s.authors     = ["Jindrich Skupa (@eMan)"]
   s.email       = 'jindrich.skupa@gmail.com'
   s.executables << 'api_mini_tester'
-  s.files       = Dir['lib/**/*']
+  s.executables << 'postman2minitester'
+  s.files       = Dir['lib/**/*','lib/**/**/*']
   s.homepage    = 'http://rubygems.org/gems/api_mini_tester'
   s.license     = 'MIT'
   s.add_runtime_dependency 'builder', '~> 3.0', '>= 3.0.4'

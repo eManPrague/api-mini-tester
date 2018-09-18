@@ -1,3 +1,11 @@
+# api-mini-tester (0.1.9) RELEASED
+
+  * Resolve "Import scenario from Postman collection"
+
+Authors
+
+* Jindrich Skupa
+
 # api-mini-tester (0.1.8) RELEASED
 
   * Add support for defaults merged into step definition

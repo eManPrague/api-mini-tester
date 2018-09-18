@@ -14,7 +14,7 @@ class SuiteHashTest < SuiteTest
         'Content-Type' => 'application/json',
         'From' => 'me@you.it',
         'Count' => '8',
-        'User-Agent'=>'Api-Mini-Tester-Agent'
+        'User-Agent' => 'Api-Mini-Tester-Agent'
       })
     .to_return(status: 200, body: "", headers: {})
     @suite.run_scenarios

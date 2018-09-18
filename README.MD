@@ -237,3 +237,19 @@ curl -X POST --header "X-Api-Token:$VIPER_API_TOKEN" \
   --header "X-Api-Ref:$CI_COMMIT_REF_SLUG" \
   "https://viper.dev.eman.cz/api/tests?service=apiminitester"
 ```
+
+### Run YAML definition directly
+
+```bash
+# api_mini_tester <input_file.yaml> [output_format: simple, json, yaml, markdown, junit_xml, ...]
+api_mini_tester api-mini-tester-definition.yaml json
+```
+
+### Postman collection import
+
+Conversion from Postman collection into YAML definition is more accuracy.
+
+```bash
+# postman2minitester <input_file.json> <output_file.yaml>
+postman2minitester postman.collection.json api-mini-tester-definition.yaml
+```
