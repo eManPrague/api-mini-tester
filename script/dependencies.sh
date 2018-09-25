@@ -13,5 +13,5 @@ echo '}' >> libraries.json
 curl -H "X-App-Token: ${KRAKEN_APP_TOKEN}" \
   -H "X-App-Version: ${CI_COMMIT_TAG}" \
   -H "Content-Type: application/json" \
-  -X POST -d @libraries.json https://versions.dev.eman.cz/api/packages
+  -X POST -d @libraries.json https://versions.eman.cz/api/packages
 

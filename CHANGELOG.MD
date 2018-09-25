@@ -1,3 +1,12 @@
+# api-mini-tester (0.1.10) RELEASED
+
+  * Fixed Postman import for multi folder collections
+  * Postman import fixes and Swagger import empty class
+
+Authors
+
+* Jindrich Skupa
+
 # api-mini-tester (0.1.9) RELEASED
 
   * Resolve "Import scenario from Postman collection"

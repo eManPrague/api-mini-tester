@@ -8,6 +8,9 @@ Use prepared static or [fake](http://rubygems.org/gems/faker)/ or [cz_fake](http
 
 [![Gem Version](https://badge.fury.io/rb/api_mini_tester.svg)](https://badge.fury.io/rb/api_mini_tester)
 [![Build Status](https://travis-ci.org/eManPrague/api-mini-tester.svg?branch=master)](https://travis-ci.org/eManPrague/api-mini-tester)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/eManPrague/api-mini-tester/blob/master/LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-in%20progress-lightgrey.svg)](https://github.com/eManPrague/api-mini-tester/blob/master/README.MD)
+
 
 ## Install
 

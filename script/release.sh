@@ -14,4 +14,16 @@ cat << EOF > release.json
 }
 EOF
 
+RET=$(curl -s -o /dev/null -w "%{http_code}" -XPOST \
+  -H "PRIVATE-TOKEN: $GL_PRIVATE_TOKEN" \
+  -H 'Content-type: application/json' \
+  -d @release.json \
+  https://gitlab.eman.cz/api/v4/projects/${CI_PROJECT_ID}/repository/tags/${CI_COMMIT_TAG}/release)
+
+[ $RET -eq 409 ] && RET=$(curl -s -o /dev/null -w "%{http_code}" -XPUT \
+  -H "PRIVATE-TOKEN: $GL_PRIVATE_TOKEN" \
+  -H 'Content-type: application/json' \
+  -d @release.json \
+  https://gitlab.eman.cz/api/v4/projects/${CI_PROJECT_ID}/repository/tags/${CI_COMMIT_TAG}/release)
+
 exit 0

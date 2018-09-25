@@ -12,7 +12,7 @@ module ApiMiniTester
 
       def to_yaml
         suite = suite_base
-        suite['tests'][0]['steps'] = steps
+        suite['tests'][0]['steps'] = steps(collection['item'])
         suite.to_yaml
       end
 
@@ -21,7 +21,7 @@ module ApiMiniTester
           'name' => name,
           'desc' => "Imported from postman collection: #{name}",
           'settings' => {
-            'baseurl' => baseurl
+            'baseurl' => baseurl(collection['item'])
           },
           'tests' => [
             {
@@ -36,26 +36,35 @@ module ApiMiniTester
         collection['info']['name']
       end
 
-      def baseurl
-        @base ||= begin
-          base = collection['item'][0]['request']['url']['raw']
-          collection['item'].each do |item|
-            item_url = item['request']['url']['raw']
-            index = 0
-            index += 1 while base[index] && item_url[index] && base[index] == item_url[index]
-            base = base[0..(index - 1)][0..(base.rindex('/') - 1)]
-          end
-          base
-        end
-        @base
+      def max_common_url(url1, url2)
+        return "" unless url1 && url2
+        index = 0
+        index += 1 while url1[index] && url2[index] && url1[index] == url2[index]
+        return "" if index == 0
+        url1[0..(index - 1)][0..(url1.rindex('/') - 1)]
       end
 
-      def steps
+      def baseurl(items)
+        base = ''
+        items.each do |item|
+          if item['item']
+            item_url = baseurl(item['item']) 
+          elsif item['request']
+            item_url = item['request']['url']['raw']
+          end
+          base = max_common_url(base, item_url)
+        end
+        base
+      end
+
+      def steps(items)
         res = []
-        index = 0
-        collection['item'].each do |item|
-          res << step(item, index)
-          index += 1
+        items.each do |item|
+          if item['item']
+            res << steps(item['item'])
+          elsif item['request']
+            res << step(item)
+          end
         end
         res
       end
@@ -73,12 +82,16 @@ module ApiMiniTester
       end
 
       def step_body(body)
-        body ? JSON.parse(body) : {}
+        begin
+          body ? JSON.parse(body) : {}
+        rescue JSON::ParserError
+          {}
+        end
       end
 
-      def step(item, index)
+      def step(item)
         res = {
-          'step' => index,
+          'step' => item['name'],
           'name' => item['name'],
           'method' => item['request']['method'],
           'uri' => step_uri(item['request']['url']['raw']),
