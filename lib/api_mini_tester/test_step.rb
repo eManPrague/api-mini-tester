@@ -121,6 +121,10 @@ module ApiMiniTester
         response = HTTParty.put(uri, headers: headers, body: body)
       when :delete
         response = HTTParty.delete(uri, headers: headers)
+      when :patch
+        response = HTTParty.patch(uri, headers: headers, body: body)
+      else
+        raise "Unknown HTTP method: #{method}"
       end
       @timing = Time.now - @timing
 

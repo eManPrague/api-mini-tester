@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'api_mini_tester'
-  s.version     = '0.1.10'
+  s.version     = '0.1.11'
   s.date        = '2018-09-25'
   s.summary     = "Runs automated REST API based on YAML definition"
   s.description = "Runs automated REST API based on YAML definition. Uses templates for API requests, mock data with faker and cz_faker and context data. Supports Postman collection export for conversion."
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.add_runtime_dependency 'builder', '~> 3.0', '>= 3.0.4'
   s.add_runtime_dependency 'faker', '~> 1.8', '>= 1.8.7'
-  s.add_runtime_dependency 'cz_faker', '~> 0.0.3', '>= 0.0.3'
+  s.add_runtime_dependency 'cz_faker', '~> 0.0.5', '>= 0.0.5'
   s.add_runtime_dependency 'hash_parser', '~> 0.0', '>= 0.0.2'
   s.add_runtime_dependency 'httparty', '~> 0.16', '>= 0.16.0'
   s.add_runtime_dependency 'liquid', '~> 4.0', '>= 4.0.0'

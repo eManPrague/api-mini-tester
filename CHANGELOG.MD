@@ -1,3 +1,11 @@
+# api-mini-tester (0.1.11) RELEASED
+
+
+
+Authors
+
+
+
 # api-mini-tester (0.1.10) RELEASED
 
   * Fixed Postman import for multi folder collections
