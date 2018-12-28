@@ -5,13 +5,18 @@ require_relative 'test_formatter'
 module ApiMiniTester
   class TestSuite
 
-    attr_reader :base_uri, :scenarios, :data, :results, :defaults
+    DEBUG_FILE = 'debug.json'.freeze
+    attr_reader :base_uri, :scenarios, :data, :results, :defaults, :debug
 
-    def initialize(suite_def)
+    def initialize(suite_def, debug = false)
       if suite_def.is_a?(String)
         @test = YAML.load(File.open(suite_def))
       elsif suite_def.is_a?(Hash)
         @test = suite_def
+      end
+      @debug = debug
+      if debug
+        File.delete(DEBUG_FILE) if File.exist?(DEBUG_FILE)
       end
       setup
     end
@@ -33,7 +38,7 @@ module ApiMiniTester
 
     def run_scenarios
       scenarios.each do |scenario|
-        runner = TestScenario.new(base_uri, scenario, data, defaults)
+        runner = TestScenario.new(base_uri, scenario, data, defaults, debug)
         runner.run_scenario
         @results[:scenarios] << runner.results
       end

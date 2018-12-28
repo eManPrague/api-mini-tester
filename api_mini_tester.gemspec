@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'api_mini_tester'
-  s.version     = '0.1.11'
-  s.date        = '2018-09-25'
+  s.version     = '0.1.12'
+  s.date        = '2018-12-28'
   s.summary     = "Runs automated REST API based on YAML definition"
   s.description = "Runs automated REST API based on YAML definition. Uses templates for API requests, mock data with faker and cz_faker and context data. Supports Postman collection export for conversion."
   s.authors     = ["Jindrich Skupa (@eMan)"]

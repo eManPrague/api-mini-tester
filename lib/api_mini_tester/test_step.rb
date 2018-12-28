@@ -14,10 +14,14 @@ module ApiMiniTester
     SUPPORTED_METHODS = %i[ get post put delete ].freeze
     SUPPORTED_RANDOM_DISTRIBUTION = %w[ static norm uniform ].freeze
 
-    attr_accessor :name, :input, :output
-    attr_reader :results, :sleeps, :method, :uri
+    attr_accessor :name, :input, :output, :timing
+    attr_reader :results, :sleeps, :method, :uri, :debug
 
-    def initialize(base_uri, step, context = nil, data = nil, defaults = nil)
+    def initialize(base_uri, step, context = nil, data = nil, defaults = nil, debug = false)
+      @debug = debug
+      if debug
+        @debug_output = File.open(ApiMiniTester::TestSuite::DEBUG_FILE, 'a')
+      end
       step = step.deep_merge!(defaults) do |key, this_val, other_val|
         if this_val.nil?
           other_val
@@ -66,7 +70,7 @@ module ApiMiniTester
 
     def headers
       @input['header'] = {} unless @input['header']
-      @input['header']['Content-type'] = content_type if content_type == 'application/json'
+      @input['header']['Content-Type'] = content_type if content_type == 'application/json'
       @input['header']
     end
 
@@ -79,6 +83,10 @@ module ApiMiniTester
       else
         @input["body"].to_json
       end
+    end
+
+    def raw_body
+      @input["body"].to_hash
     end
 
     def body_to_form_data
@@ -135,12 +143,25 @@ module ApiMiniTester
       add_result :url, { result: true, desc: "Url: #{uri}" }
       add_result :method, { result: true, desc: "Method: #{method}" }
 
+      log_debug({ headers: headers, body: raw_body },
+                { headers: response.headers, body: response.parsed_response, code: response.code },
+                output) if debug
+
+      run_asserts(response)
+
+      [ results, response ]
+    end
+
+    def run_asserts(response)
       assert_status(response.code, test_status)
       assert_headers(response.headers, test_headers)
       assert_body(response.parsed_response, test_body)
-      assert_timing(@timing, test_timing)
+      assert_timing(timing, test_timing)
+    end
 
-      [ results, response ]
+    def log_debug(request, response, expectations)
+      log = { uri: uri, method: method, request: request, response: response, expectations: expectations }
+      @debug_output.puts log.to_json
     end
 
     def print_results

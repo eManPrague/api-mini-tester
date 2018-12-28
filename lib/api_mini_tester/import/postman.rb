@@ -40,7 +40,7 @@ module ApiMiniTester
         return "" unless url1 && url2
         index = 0
         index += 1 while url1[index] && url2[index] && url1[index] == url2[index]
-        return "" if index == 0
+        return "" if index.zero?
         url1[0..(index - 1)][0..(url1.rindex('/') - 1)]
       end
 
@@ -48,7 +48,7 @@ module ApiMiniTester
         base = ''
         items.each do |item|
           if item['item']
-            item_url = baseurl(item['item']) 
+            item_url = baseurl(item['item'])
           elsif item['request']
             item_url = item['request']['url']['raw']
           end
@@ -82,11 +82,9 @@ module ApiMiniTester
       end
 
       def step_body(body)
-        begin
-          body ? JSON.parse(body) : {}
-        rescue JSON::ParserError
-          {}
-        end
+        body ? JSON.parse(body) : {}
+      rescue JSON::ParserError
+        {}
       end
 
       def step(item)

@@ -137,6 +137,14 @@ puts suite.print_results(:simple)
 ruby run_test.rb
 ```
 
+## Debug output
+
+For debug output into `debug.json` file create TestSuite with debug flag.
+
+```ruby
+suite = ApiMiniTester::TestSuite.new("tests/test.example.yml", true)
+```
+
 ## Outputs
 
 * markdown
@@ -188,6 +196,29 @@ simple
 ```
 
 other examples are in `example` directory
+
+## CLI tools
+
+### api_mini_tester
+
+Runs test suite from command line.
+
+Usage: `api_mini_tester [--debug] [input_file.yml] [output_format]`
+
+```bash
+$ api_mini_tester --debug scenarios/sc01.yml simple
+....E..
+```
+
+### postman2minitester
+
+Converts Postman JSON collection into API mini tester YAML test specification.
+
+Usage: `api_mini_tester [input_file.json] [output_file.yaml]`
+
+```bash
+$ postman2minitester postman.json postman.yml
+```
 
 ## Integration
 

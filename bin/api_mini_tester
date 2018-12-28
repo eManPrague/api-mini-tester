@@ -3,12 +3,18 @@
 require 'api_mini_tester'
 
 begin
-  puts "usage: api_mini_tester [input_file.yml] [output_format]"
+  puts "usage: api_mini_tester [--debug] [input_file.yml] [output_format]"
   exit 1
 end if ARGV.empty?
 
-output_format = ARGV[1] ? ARGV[1].to_sym : :simple
-
-suite = ApiMiniTester::TestSuite.new(ARGV[0])
+debug = ARGV.include?("--debug")
+if debug
+  output_format = ARGV[2] ? ARGV[2].to_sym : :simple
+  input_file = ARGV[1]
+else
+  output_format = ARGV[1] ? ARGV[1].to_sym : :simple
+  input_file = ARGV[0]
+end
+suite = ApiMiniTester::TestSuite.new(input_file, debug)
 suite.run_scenarios
 puts suite.print_results(output_format)

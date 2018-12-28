@@ -3,14 +3,15 @@ require_relative 'test_step'
 module ApiMiniTester
   class TestScenario
 
-    attr_reader :base_uri, :scenario, :data, :results, :name, :defaults
+    attr_reader :base_uri, :scenario, :data, :results, :name, :defaults, :debug
 
-    def initialize(base_uri, scenario, data, defaults)
+    def initialize(base_uri, scenario, data, defaults, debug = false)
       @base_uri = base_uri
       @scenario = scenario
       @data = data
       @name = scenario['name']
       @defaults = defaults
+      @debug = debug
       @results = {name: @name, desc: scenario['desc'], steps: []}
     end
 
@@ -36,7 +37,7 @@ module ApiMiniTester
     def run_scenario
       @context = []
       scenario['steps'].each do |step|
-        step = TestStep.new(base_uri, step, @context, data, defaults)
+        step = TestStep.new(base_uri, step, @context, data, defaults, debug)
         step_result, context = step.run_step
         @results[:steps] << step_result
         @context << context
