@@ -187,7 +187,6 @@ module ApiMiniTester
           Random.new.rand(params['max'] - params['min']) + params['min']
         end
       end
-      puts "Sleeping for #{t} seconds"
       sleep(t.to_f.abs) if t
     end
 
