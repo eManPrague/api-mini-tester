@@ -70,14 +70,14 @@ module ApiMiniTester
 
     def headers
       @input['header'] = {} unless @input['header']
-      @input['header']['Content-Type'] = content_type if content_type == 'application/json'
+      @input['header']['Content-Type'] ||= content_type
       @input['header']
     end
 
     def body
       case content_type
       when 'application/x-www-form-urlencoded'
-        body_to_form_data
+        body_to_urlencoded
       when 'multipart/form-data'
         body_to_form_data
       else
@@ -96,6 +96,14 @@ module ApiMiniTester
         body[item['name']] = File.open(item['value'], 'r') if item['type'] == 'file'
       end
       body
+    end
+
+    def body_to_urlencoded
+      body = []
+      @input["body"].each do |key, value|
+        body << [key, value]
+      end
+      URI.encode_www_form(body)
     end
 
     def test_headers
