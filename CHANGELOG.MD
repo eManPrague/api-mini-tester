@@ -1,10 +1,43 @@
-# api-mini-tester (0.1.11) RELEASED
+# api-mini-tester (0.1.15) RELEASED
 
-
+  * Add support for item datatype annotation
+  * Release 0.1.15
 
 Authors
 
+* Jindrich Skupa
 
+# api-mini-tester (0.1.14) RELEASED
+
+  * Fixed urlencoded body handling
+
+Authors
+
+* Jindrich Skupa
+
+# api-mini-tester (0.1.13) RELEASED
+
+  * Fix: removed debug output for sleeping
+
+Authors
+
+* Jindrich Skupa
+
+# api-mini-tester (0.1.12) RELEASED
+
+  * Add debug output for test development
+
+Authors
+
+* Jindrich Skupa
+
+# api-mini-tester (0.1.11) RELEASED
+
+  * Fix missing methods, update czfaker version
+
+Authors
+
+* Jindrich Skupa
 
 # api-mini-tester (0.1.10) RELEASED
 

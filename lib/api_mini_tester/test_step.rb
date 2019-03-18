@@ -13,6 +13,11 @@ module ApiMiniTester
 
     SUPPORTED_METHODS = %i[ get post put delete ].freeze
     SUPPORTED_RANDOM_DISTRIBUTION = %w[ static norm uniform ].freeze
+    TYPE_TO_METHOD_MAP = {
+      'integer' => 'to_i',
+      'float' => 'to_f',
+      'string' => 'to_s'
+    }.freeze
 
     attr_accessor :name, :input, :output, :timing
     attr_reader :results, :sleeps, :method, :uri, :debug
@@ -81,12 +86,18 @@ module ApiMiniTester
       when 'multipart/form-data'
         body_to_form_data
       else
-        @input["body"].to_json
+        body_by_anotations
       end
+    end
+
+    def body_by_anotations
+      resolve_annotations(@input["body"]).to_json
     end
 
     def raw_body
       @input["body"].to_hash
+    rescue StandardError
+      ""
     end
 
     def body_to_form_data
@@ -279,6 +290,42 @@ module ApiMiniTester
                                 desc: "Assert #{[path, k].join(".")}: #{a[k]} #{a[k] == b[k] ? '==' : '!='} #{b[k]}" }
         end
       end
+    end
+
+    def type_to_method(type)
+      TYPE_TO_METHOD_MAP[type.downcase].to_sym
+    end
+
+    def resolve_annotations(struct)
+      if struct.instance_of?(Hash)
+        struct = resolve_annotations_hash(struct)
+      end
+      struct
+    end
+
+    def resolve_annotations_hash(hash)
+      hash.each do |k, v|
+        next unless matched = /\A\.(?<key>.*)\Z/.match(k)
+        type = v
+        typed_key = matched[:key]
+        next if hash[typed_key].nil?
+        hash[typed_key] = if hash[typed_key].instance_of?(Array)
+                            resolve_annotations_array(hash[typed_key], type)
+                          else
+                            resolve_annotations_value(hash[typed_key], type)
+                          end
+        hash.delete(k)
+      end
+    end
+
+    def resolve_annotations_value(value, type)
+      value.send(type_to_method(type))
+    rescue StandardError
+      value
+    end
+
+    def resolve_annotations_array(array, type)
+      array.map(&type_to_method(type))
     end
   end
 end

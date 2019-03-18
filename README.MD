@@ -110,6 +110,9 @@ tests:
         body:
           # use CzFaker, choose method with params without 'CzFaker' module namespace and use filter cz_fake
           name: "{{ 'Name.name(:female)' | cz_fake }}"
+          # use CzFaker and minus filter, regarding datatype annotation converts string into integer
+          timestamp: "{{ 'Date.unix_timestamp' | cz_fake | minus: 10 }}"
+          .timestamp: integer
       output:
         header: nil
         body: nil

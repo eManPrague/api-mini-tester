@@ -2,6 +2,8 @@ name: "All features example"
 desc: "Longer description"
 settings:
   baseurl: "https://api.example.com"
+data:
+  time: 1000
 tests:
   - name: "Test scenario login and avatar upload"
     desc: "Longer description"
@@ -39,8 +41,12 @@ tests:
         body:
           username: user007
           password: WrongPassword
+          timestamp: "{{ 'Date.unix_timestamp' | cz_fake | minus: 20 }}"
+          .timestamp: integer
+          timestamp2: "{{ 'Date.unix_timestamp' | cz_fake | plus: 80 }}"
+          .timestamp2: integer
       output:
-        header: 
+        header:
         status: 401
         body:
           result: "Wrong username or password"
